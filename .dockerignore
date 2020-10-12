@@ -1,0 +1,6 @@
+.rspec
+.bundle
+vendor/bundle
+vendor/assets
+log
+tmp
