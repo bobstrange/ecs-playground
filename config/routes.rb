@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   resource :authors
   resource :posts
+
+  post "posts/:id/increment_like", to: 'posts#increment_like'
 end

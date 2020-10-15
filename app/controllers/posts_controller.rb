@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :update, :destroy]
+  before_action :set_post, only: [:show, :update, :increment_like, :destroy]
 
   # GET /posts
   def index
@@ -22,6 +22,11 @@ class PostsController < ApplicationController
     else
       render json: @post.errors, status: :unprocessable_entity
     end
+  end
+
+  def increment_like
+    ::IncrementLikeCountWorker.perform_async(@post.id)
+    render json: @post
   end
 
   # PATCH/PUT /posts/1
