@@ -1,14 +1,16 @@
 FROM ruby:2.7
 
+ARG APP_ROOT=/app
+ENV APP_ROOT ${APP_ROOT}
+WORKDIR ${APP_ROOT}
+
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-RUN mkdir /app
-WORKDIR /app
 
-COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
+COPY Gemfile ${APP_ROOT}/Gemfile
+COPY Gemfile.lock ${APP_ROOT}/Gemfile.lock
 
-RUN bundle install
-COPY . /app
+RUN bundle config set path 'vendor/bundle' && bundle install
+COPY . ${APP_ROOT}
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
