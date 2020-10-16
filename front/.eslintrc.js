@@ -6,7 +6,10 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-essential',
     '@vue/standard',
-    '@vue/typescript/recommended'
+    '@vue/typescript/recommended',
+    'prettier', // @see https://github.com/prettier/eslint-config-prettier#installation
+    'prettier/standard',
+    'prettier/vue'
   ],
   parserOptions: {
     ecmaVersion: 2020
