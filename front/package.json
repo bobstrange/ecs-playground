@@ -7,11 +7,14 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "run-p lint:*",
-    "lint:eslint": "vue-cli-service lint --no-fix",
-    "lint:prettier": "prettier . \"!test*\" --check",
-    "fix": "run-s fix:eslint fix:prettier",
+    "lint:eslint": "eslint \"./**/*.{js,ts,vue}\"",
+    "lint:prettier": "prettier . \"./**/*.{js,ts,vue}\" --check",
+    "lint:stylelint": "stylelint \"src/**/*.{css,scss,vue}\"",
+    "fix": "run-p lint:*",
+    "fix:js": "run-s fix:eslint fix:prettier",
     "fix:eslint": "vue-cli-service lint",
-    "fix:prettier": "npm run lint:prettier -- --write"
+    "fix:prettier": "npm run lint:prettier -- --write",
+    "fix:stylelint": "npm run lint:stylelint -- --fix"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -45,6 +48,11 @@
     "prettier": "^2.1.2",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
+    "stylelint": "^13.7.2",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.18.0",
     "typescript": "~3.9.3",
     "vue-jest": "^5.0.0-0"
   }
