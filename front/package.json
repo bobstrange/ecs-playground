@@ -10,7 +10,7 @@
     "lint:eslint": "eslint \"./**/*.{js,ts,vue}\"",
     "lint:prettier": "prettier . \"./**/*.{js,ts,vue}\" --check",
     "lint:stylelint": "stylelint \"src/**/*.{css,scss,vue}\"",
-    "fix": "run-p lint:*",
+    "fix": "run-p fix:js fix:stylelint",
     "fix:js": "run-s fix:eslint fix:prettier",
     "fix:eslint": "vue-cli-service lint",
     "fix:prettier": "npm run lint:prettier -- --write",
