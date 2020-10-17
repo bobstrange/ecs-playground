@@ -3,15 +3,17 @@ services:
   db:
     image: postgres
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - volume-db-data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
   web: &ruby_base
-    build: .
+    build:
+      context: ./web
+      dockerfile: Dockerfile.dev
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - bundle:${APP_ROOT}/vendor/bundle
-      - .:${APP_ROOT}
+      - volume-bundle:${APP_ROOT}/vendor/bundle
+      - ./web:${APP_ROOT}
     ports:
       - "${APP_PORT}:3000"
     environment:
@@ -29,7 +31,7 @@ services:
     ports:
       - "${REDIS_PORT}:6379"
 volumes:
-  db-data:
+  volume-db-data:
     driver: local
-  bundle:
+  volume-bundle:
     driver: local
