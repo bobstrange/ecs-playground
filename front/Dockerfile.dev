@@ -12,4 +12,3 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 8080
 
 CMD ["npm", "run", "serve"]
-USER node
