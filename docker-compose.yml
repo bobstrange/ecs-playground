@@ -12,10 +12,10 @@ services:
       dockerfile: Dockerfile.dev
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - volume-bundle:${APP_ROOT}/vendor/bundle
-      - ./web:${APP_ROOT}
+      - volume-bundle:${API_ROOT}/vendor/bundle
+      - ./web:${API_ROOT}
     ports:
-      - "${APP_PORT}:3000"
+      - "${API_PORT}:3000"
     environment:
       DB_USER: ${DB_USER}
       DB_HOST: ${DB_HOST}
@@ -30,8 +30,20 @@ services:
     image: redis
     ports:
       - "${REDIS_PORT}:6379"
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile.dev
+    command: npm run serve
+    ports:
+      - "${FRONT_PORT}:8080"
+    volumes:
+      - volume-node-modules:${FRONT_ROOT}/node_modules
+      - ./front:${FRONT_ROOT}
 volumes:
   volume-db-data:
     driver: local
   volume-bundle:
+    driver: local
+  volume-node-modules:
     driver: local
