@@ -1,4 +1,5 @@
 import { client } from '@/apis/client'
+/* eslint  @typescript-eslint/member-delimiter-style: 0 */
 
 type PostResponse = {
   id: number
@@ -23,8 +24,8 @@ export async function fetchPosts(): Promise<Post[]> {
   )
 }
 
-export async function incrementLike(id: Post['id']) {
+export async function incrementPostLike(id: Post['id']): Promise<Post> {
   return (
     await client.post<PostResponse[]>(`posts/${id}/increment_like`)
-  ).data.map(postResponseMapper)
+  ).data.map(postResponseMapper)[0]
 }
