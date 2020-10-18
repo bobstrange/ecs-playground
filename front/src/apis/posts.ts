@@ -25,7 +25,7 @@ export async function fetchPosts(): Promise<Post[]> {
 }
 
 export async function incrementPostLike(id: Post['id']): Promise<Post> {
-  return (
-    await client.post<PostResponse[]>(`posts/${id}/increment_like`)
-  ).data.map(postResponseMapper)[0]
+  return Array(
+    (await client.post<PostResponse>(`posts/${id}/increment_like`)).data
+  ).map(postResponseMapper)[0]
 }

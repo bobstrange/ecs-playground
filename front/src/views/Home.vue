@@ -12,6 +12,7 @@
         <td class="title">{{ post.title }}</td>
         <td class="body">{{ post.body }}</td>
         <td class="likes-count">{{ post.likesCount }}</td>
+        <td class="clap"><button @click="clap(post)">Like</button></td>
       </tr>
     </table>
   </div>
@@ -19,18 +20,23 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, ref } from 'vue'
-import { Post, fetchPosts } from '../apis/posts'
+import { Post, fetchPosts, incrementPostLike } from '../apis/posts'
 
 export default defineComponent({
   name: 'Home',
   setup() {
     const posts = ref<Post[]>([])
 
+    const clap = async (post: Post) => {
+      await incrementPostLike(post.id)
+      post.likesCount += 1
+    }
+
     onBeforeMount(async () => {
       posts.value = await fetchPosts()
     })
 
-    return { posts }
+    return { posts, clap }
   }
 })
 </script>
