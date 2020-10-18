@@ -17,7 +17,6 @@ export default defineComponent({
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
@@ -32,5 +31,12 @@ export default defineComponent({
       color: #42b983;
     }
   }
+}
+
+h1 {
+  font-size: 1.5em;
+}
+h2 {
+  font-size: 1.3em;
 }
 </style>

@@ -2,11 +2,18 @@
   <div class="home">
     <h1>Home Page</h1>
     <h2>Posts</h2>
-    <ul>
-      <li v-for="post in posts" :key="post.id">
-        {{ post.title }}
-      </li>
-    </ul>
+    <table class="posts-table">
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Likes</th>
+      </tr>
+      <tr v-for="post in posts" :key="post.id">
+        <td class="title">{{ post.title }}</td>
+        <td class="body">{{ post.body }}</td>
+        <td class="likes-count">{{ post.likesCount }}</td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -27,3 +34,40 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+li {
+  list-style-type: none;
+}
+
+.posts-table {
+  max-width: 1000px;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+.posts-table th {
+  border-bottom: 1px solid black;
+  padding: 5px;
+}
+
+.posts-table tr {
+  min-height: 40px;
+}
+
+.posts-table td {
+  border-bottom: 1px solid black;
+  padding: 5px 10px;
+}
+.title {
+  text-align: center;
+}
+
+.body {
+  text-align: left;
+}
+
+.likes-count {
+  text-align: right;
+}
+</style>
