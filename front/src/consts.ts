@@ -1,5 +1,5 @@
-if (!process.env.BASE_URL) {
-  throw new Error('BASE_URL should be defined')
+if (!process.env.VUE_APP_API_URL) {
+  throw new Error('VUE_APP_API_URL should be defined')
 }
 
-export const BASE_URL = process.env.BASE_URL as string
+export const API_URL = process.env.VUE_APP_API_URL as string
