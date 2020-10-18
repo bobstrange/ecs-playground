@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   resource :posts
 
   post "posts/:id/increment_like", to: 'posts#increment_like'
+
+  # TODO: make only admin can see sidekiq
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 end
